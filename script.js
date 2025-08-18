@@ -1,43 +1,25 @@
 // DOM Content Loaded
-document.addEventListener("DOMContentLoaded", function () {
-  // Initialize preloader
-  initPreloader();
-
-  // Initialize all functionality
-  initMobileMenu();
-  initSmoothScrolling();
-  initScrollEffects();
-  initContactForm();
-  initGallery();
-  initAnimations();
-
-  // Initialize AOS (Animate On Scroll)
-  if (typeof AOS !== "undefined") {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
-      offset: 100,
-    });
-  }
-});
-
-// Preloader functionality
-function initPreloader() {
-  const preloader = document.querySelector(".preloader");
-
-  if (preloader) {
-    // Simulate loading time
-    setTimeout(() => {
-      preloader.classList.add("fade-out");
-
-      // Remove preloader after animation
-      setTimeout(() => {
-        preloader.remove();
-      }, 800);
-    }, 2500);
+function onIdle(cb) {
+  if ("requestIdleCallback" in window) {
+    requestIdleCallback(cb, { timeout: 1500 });
+  } else {
+    setTimeout(cb, 200);
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Critical UI init (fast, minimal)
+  initMobileMenu();
+  initSmoothScrolling();
+
+  // Defer non-critical work to idle
+  onIdle(() => {
+    initScrollEffects();
+    initContactForm();
+    initGallery();
+    initAnimations();
+  });
+});
 
 // Mobile Menu Functionality
 function initMobileMenu() {
@@ -111,36 +93,43 @@ function initScrollEffects() {
   const navLinks = document.querySelectorAll(".nav-link");
   const sections = document.querySelectorAll("section[id]");
 
-  window.addEventListener("scroll", function () {
+  let ticking = false;
+  function onScroll() {
     const scrollTop = window.pageYOffset;
 
-    // Header background effect
-    if (scrollTop > 100) {
-      header.style.background = "rgba(255, 255, 255, 0.98)";
-      header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.15)";
-    } else {
-      header.style.background = "rgba(255, 255, 255, 0.95)";
-      header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.1)";
-    }
+    // Toggle header class instead of inline styles (avoid forced reflow)
+    if (scrollTop > 100) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
 
     // Active navigation link highlighting
     let current = "";
     sections.forEach((section) => {
       const sectionTop = section.offsetTop - 150;
       const sectionHeight = section.offsetHeight;
-
       if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
         current = section.getAttribute("id");
       }
     });
 
     navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) {
-        link.classList.add("active");
-      }
+      link.classList.toggle(
+        "active",
+        link.getAttribute("href") === `#${current}`
+      );
     });
-  });
+    ticking = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
 }
 
 // Contact Form Functionality
@@ -580,37 +569,8 @@ window.addEventListener(
   }, 100)
 );
 
-// Add loading animation
+// Initialize enhanced animations on load (without blocking overlay)
 window.addEventListener("load", function () {
   document.body.classList.add("loaded");
   initEnhancedAnimations();
-
-  // Add loading styles
-  const loadingStyle = document.createElement("style");
-  loadingStyle.textContent = `
-        body:not(.loaded) {
-            overflow: hidden;
-        }
-        
-        body:not(.loaded)::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #2c5aa0;
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        body.loaded::before {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-        }
-    `;
-  document.head.appendChild(loadingStyle);
 });

@@ -17,6 +17,23 @@ body {
   background: #ffffff;
 }
 
+/* Performance: minimize layout work below the fold */
+section:not(:first-of-type) {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
+/* Performance: avoid FOIT when web fonts load */
+:root {
+  --font-inter: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", Times, serif;
+}
+
+body {
+  font-family: var(--font-inter);
+}
+
 /* Preloader Styles */
 .preloader {
   position: fixed;
@@ -108,11 +125,15 @@ body {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.header.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
 }
 
 .navbar {
@@ -133,7 +154,7 @@ body {
   font-weight: 700;
   font-size: 1.5rem;
   margin-bottom: 0.2rem;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter);
   letter-spacing: 0.05em;
 }
 
@@ -1832,6 +1853,7 @@ section {
 @media (max-width: 1024px) {
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+
     gap: 1.5rem;
   }
 }
