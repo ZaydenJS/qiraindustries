@@ -1084,7 +1084,7 @@ section {
   }
 
   .nav-menu li {
-    margin: 0.8rem 0;
+    margin: 0.2rem 0;
   }
 
   .nav-link {
@@ -1380,7 +1380,7 @@ section {
   }
 
   .nav-menu li {
-    margin: 1rem 0;
+    margin: 0.2rem 0;
   }
 
   .nav-contact {
@@ -1550,6 +1550,23 @@ section {
 
 /* Additional Mobile Improvements */
 @media (max-width: 768px) {
+  /* Clean mobile navigation hover effects */
+  .nav-link::after {
+    display: none !important;
+  }
+
+  .nav-link {
+    padding: 0.6rem 1.5rem !important;
+    margin: 0.1rem 1rem !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .nav-link:hover {
+    background-color: rgba(44, 90, 160, 0.1) !important;
+    color: #2c5aa0 !important;
+  }
+
   /* Hide Our Commitment section on all mobile devices */
   .hero-visual {
     display: none !important;
