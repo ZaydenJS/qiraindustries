@@ -27,7 +27,7 @@ function initMobileMenu() {
   const navMenu = document.querySelector(".nav-menu");
   const navLinks = document.querySelectorAll(".nav-link");
 
-  hamburger.addEventListener("click", function () {
+  function toggleMenu() {
     hamburger.classList.toggle("active");
     navMenu.classList.toggle("active");
 
@@ -41,6 +41,16 @@ function initMobileMenu() {
       bars[0].style.transform = "none";
       bars[1].style.opacity = "1";
       bars[2].style.transform = "none";
+    }
+  }
+
+  hamburger.addEventListener("click", toggleMenu);
+
+  // Add keyboard support for hamburger menu
+  hamburger.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleMenu();
     }
   });
 

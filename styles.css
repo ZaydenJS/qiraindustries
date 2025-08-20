@@ -34,6 +34,17 @@ body {
   font-family: var(--font-inter);
 }
 
+/* Remove bold from all headings and ensure Inter font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-inter) !important;
+  font-weight: normal !important;
+}
+
 /* Preloader Styles */
 .preloader {
   position: fixed;
@@ -60,9 +71,9 @@ body {
 }
 
 .logo-animation h1 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter);
   font-size: 4rem;
-  font-weight: 800;
+  font-weight: normal;
   margin-bottom: 2rem;
   letter-spacing: 0.2em;
   animation: logoGlow 2s ease-in-out infinite alternate;
@@ -151,7 +162,7 @@ body {
 
 .nav-logo h2 {
   color: #2c5aa0;
-  font-weight: 700;
+  font-weight: normal;
   font-size: 1.5rem;
   margin-bottom: 0.2rem;
   font-family: var(--font-inter);
@@ -334,11 +345,11 @@ body {
 
 .hero-title {
   font-size: 3.5rem;
-  font-weight: 700;
+  font-weight: normal;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: #1a202c;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter);
 }
 
 .hero-title .highlight {
@@ -377,9 +388,9 @@ body {
 
 .stat-number {
   font-size: 2rem;
-  font-weight: 800;
+  font-weight: normal;
   color: #2c5aa0;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter);
 }
 
 .stat-label {
@@ -446,9 +457,9 @@ body {
 
 .card-header h3 {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: normal;
   color: #2c5aa0;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter);
 }
 
 .commitment-grid {
@@ -500,7 +511,7 @@ body {
 
 .commitment-text h4 {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: normal;
   color: #1a202c;
   margin-bottom: 0.25rem;
 }
@@ -604,16 +615,18 @@ body {
 }
 
 .btn-outline {
-  background: transparent;
-  color: #2c5aa0;
+  background: #2c5aa0;
+  color: white;
   border-color: #2c5aa0;
+  box-shadow: 0 8px 25px rgba(44, 90, 160, 0.2);
 }
 
 .btn-outline:hover {
-  background: #2c5aa0;
+  background: #1e3a6f;
   color: white;
+  border-color: #1e3a6f;
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(44, 90, 160, 0.3);
+  box-shadow: 0 15px 35px rgba(44, 90, 160, 0.4);
 }
 
 .btn i {
@@ -636,10 +649,10 @@ section {
 
 .section-header h2 {
   font-size: 2.5rem;
-  font-weight: 700;
+  font-weight: normal;
   color: #2c5aa0;
   margin-bottom: 1rem;
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-inter);
   position: relative;
 }
 
@@ -803,7 +816,7 @@ section {
   color: #333;
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  font-weight: 600;
+  font-weight: normal;
 }
 
 .service-card p {
@@ -1273,6 +1286,8 @@ section {
     gap: 1rem;
     text-align: center;
     justify-items: center;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    width: 100%;
   }
 
   .contact-content {
@@ -1668,6 +1683,9 @@ section {
   /* Improve gallery on mobile */
   .gallery-item {
     min-height: 200px;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   /* Better contact section */
