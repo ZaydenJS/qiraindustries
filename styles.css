@@ -186,7 +186,7 @@ h6 {
 .nav-link {
   text-decoration: none;
   color: #333;
-  font-weight: 500;
+  font-weight: normal;
   transition: color 0.3s ease;
   position: relative;
 }
@@ -216,7 +216,7 @@ h6 {
   gap: 0.5rem;
   color: #2c5aa0;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: normal;
   padding: 0.5rem 1rem;
   border: 2px solid #2c5aa0;
   border-radius: 25px;
@@ -1109,6 +1109,7 @@ section {
     font-size: 1.1rem;
     padding: 0.5rem;
     display: block;
+    font-weight: normal;
   }
 
   .nav-contact {
@@ -1609,6 +1610,7 @@ section {
     margin: 0.1rem 1rem !important;
     border-radius: 8px !important;
     transition: all 0.3s ease !important;
+    font-weight: normal !important;
   }
 
   .nav-link:hover {
