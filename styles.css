@@ -261,10 +261,13 @@ h6 {
   align-items: center;
   position: relative;
   overflow: hidden;
-  background: #ffffff;
+  /* Simplified, reliable background */
+  background: #ffffff !important;
+  background-color: #ffffff !important;
   padding-top: 80px; /* Account for fixed header */
 }
 
+/* Simplified background pattern - no complex SVG data URLs */
 .hero-background {
   position: absolute;
   top: 0;
@@ -272,6 +275,8 @@ h6 {
   width: 100%;
   height: 100%;
   z-index: 1;
+  /* Simple, reliable gradient background */
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 }
 
 .hero-pattern {
@@ -280,27 +285,34 @@ h6 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%),
-    radial-gradient(
+  /* Simplified pattern without complex gradients */
+  background: radial-gradient(
       circle at 25% 25%,
-      rgba(44, 90, 160, 0.05) 0%,
+      rgba(44, 90, 160, 0.03) 0%,
       transparent 50%
     ),
     radial-gradient(
       circle at 75% 75%,
-      rgba(255, 215, 0, 0.05) 0%,
+      rgba(44, 90, 160, 0.02) 0%,
       transparent 50%
     );
-  background-size: 100% 100%, 800px 800px, 600px 600px;
+  background-size: 800px 800px, 600px 600px;
 }
 
+/* Remove problematic SVG overlay that could cause black screen */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(44,90,160,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  /* Simple dot pattern using CSS instead of SVG data URL */
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(44, 90, 160, 0.03) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
 }
 
 .hero-container {
@@ -1127,6 +1139,9 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Ensure white background on mobile - never black */
+    background: #ffffff !important;
+    background-color: #ffffff !important;
   }
 
   .hero-container {
@@ -1436,6 +1451,9 @@ section {
 
   .hero {
     padding-top: 80px;
+    /* Ensure white background on tablet - never black */
+    background: #ffffff !important;
+    background-color: #ffffff !important;
   }
 
   .hero-container {
@@ -1632,6 +1650,9 @@ section {
   .hero {
     padding-top: 60px !important;
     margin-top: -10px !important;
+    /* Ensure white background - never black */
+    background: #ffffff !important;
+    background-color: #ffffff !important;
   }
 
   .hero-visual {
@@ -1928,6 +1949,27 @@ section {
   }
 }
 
+/* Critical: Prevent hero black screen bug */
+.hero,
+.hero *,
+.hero-background,
+.hero-pattern,
+.hero-overlay {
+  /* Force white background to prevent black screen */
+  background-color: #ffffff !important;
+}
+
+.hero {
+  /* Additional safeguards */
+  background: #ffffff !important;
+  color: inherit !important;
+}
+
+/* Ensure background layers don't override main background */
+.hero-background {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%) !important;
+}
+
 /* Print styles */
 @media print {
   .header,
@@ -1942,6 +1984,7 @@ section {
   .hero {
     padding-top: 0;
     min-height: auto;
+    background: #ffffff !important;
   }
 
   body {
