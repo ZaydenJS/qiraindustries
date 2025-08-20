@@ -326,16 +326,40 @@ h6 {
     padding-top: 75px !important;
     min-height: 100vh !important;
     padding-bottom: 2rem !important;
+    background: #ffffff !important;
+  }
+
+  /* Force white background on mobile and hide complex patterns */
+  .hero-background,
+  .hero-pattern,
+  .hero-overlay {
+    display: none !important;
+  }
+
+  /* Ensure hero has solid white background */
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff !important;
+    z-index: 1;
   }
 
   .hero-container {
     text-align: center !important;
     justify-items: center !important;
     padding-top: 0.5rem !important;
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content {
     text-align: center !important;
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content * {
@@ -1571,7 +1595,7 @@ section {
 
 /* Additional Mobile Improvements */
 @media (max-width: 768px) {
-  /* Fix white space above header on mobile */
+  /* Fix white space above header on mobile and match status bar */
   html,
   body {
     background: rgba(255, 255, 255, 0.85) !important;
@@ -1584,6 +1608,21 @@ section {
   html {
     padding-top: 0 !important;
     margin-top: 0 !important;
+    /* Make status bar area match header */
+    background: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  /* Ensure the viewport area above header matches */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 999;
+    pointer-events: none;
   }
 
   /* Ensure header starts at very top and matches body background */
