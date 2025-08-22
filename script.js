@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Critical UI init (fast, minimal)
   initMobileMenu();
   initSmoothScrolling();
+  initBackToTop();
 
   // Defer non-critical work to idle
   onIdle(() => {
@@ -94,6 +95,57 @@ function initSmoothScrolling() {
         }
       }
     });
+  });
+}
+
+// Back to Top Button (Mobile Only)
+function initBackToTop() {
+  const backToTopButton = document.getElementById("backToTop");
+
+  if (!backToTopButton) return;
+
+  // Show/hide button based on scroll position
+  let ticking = false;
+  function onScroll() {
+    const scrollTop = window.pageYOffset;
+
+    // Show button after scrolling down 300px on mobile only
+    if (window.innerWidth <= 768) {
+      if (scrollTop > 300) {
+        backToTopButton.classList.add("show");
+      } else {
+        backToTopButton.classList.remove("show");
+      }
+    }
+
+    ticking = false;
+  }
+
+  // Throttled scroll listener
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+
+  // Click handler to scroll to top
+  backToTopButton.addEventListener("click", function () {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  });
+
+  // Hide button on window resize if not mobile
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 768) {
+      backToTopButton.classList.remove("show");
+    }
   });
 }
 
