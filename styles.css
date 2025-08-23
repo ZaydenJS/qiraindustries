@@ -2514,4 +2514,13 @@ header .nav-menu .nav-link {
     -webkit-overflow-scrolling: touch !important;
     touch-action: pan-y !important; /* Allow vertical scrolling only */
   }
+
+  /* Allow normal page scrolling over about section */
+  .about,
+  .about .container,
+  .about .section-header {
+    overflow: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important; /* Allow vertical scrolling only */
+  }
 }
