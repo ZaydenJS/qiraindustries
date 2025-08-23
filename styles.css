@@ -2471,6 +2471,7 @@ header .nav-menu .nav-link {
     align-items: center !important;
     height: 100% !important;
     padding: 0 12px !important;
+    transform: translateY(-8px) !important; /* Shift content up by 8px */
   }
 
   /* Force white background and proper spacing */
@@ -2485,5 +2486,30 @@ header .nav-menu .nav-link {
     justify-content: center !important;
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
+  }
+
+  /* Fix section header text scrolling issue on mobile */
+  .section-header,
+  .section-header h2,
+  .section-header p {
+    overflow: visible !important;
+    -webkit-overflow-scrolling: auto !important;
+    touch-action: manipulation !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    pointer-events: none !important; /* Prevent text interaction */
+  }
+
+  /* Allow normal page scrolling over gallery section */
+  .gallery,
+  .gallery .container,
+  .gallery .section-header {
+    overflow: visible !important;
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-y !important; /* Allow vertical scrolling only */
   }
 }
