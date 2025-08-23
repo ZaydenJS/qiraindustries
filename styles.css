@@ -337,10 +337,14 @@ h6 {
   .hero {
     text-align: center !important;
     padding-top: 90px !important; /* Increased to push content below header */
+    height: 100vh !important; /* Use full viewport height instead of min-height */
     min-height: 100vh !important;
     padding-bottom: 0 !important; /* Remove bottom padding to eliminate gap */
     background: #ffffff !important;
     margin-bottom: 0 !important; /* Ensure no margin */
+    display: flex !important;
+    align-items: center !important; /* Center content vertically */
+    justify-content: center !important;
   }
 
   /* Force white background on mobile and hide complex patterns */
@@ -714,18 +718,18 @@ h6 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #2c5aa0, #1e3a6f);
+  background: linear-gradient(135deg, #2c5aa0, #4a90e2);
   color: white;
   border-color: #2c5aa0;
   box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, #1e3a6f, #2c5aa0);
+  background: linear-gradient(135deg, #4a90e2, #6bb6ff);
   color: white;
-  border-color: #1e3a6f;
+  border-color: #4a90e2;
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(44, 90, 160, 0.4);
+  box-shadow: 0 15px 35px rgba(74, 144, 226, 0.4);
 }
 
 .btn-outline {
@@ -1556,9 +1560,14 @@ section {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center !important;
-    padding: 1.5rem 20px; /* Reduced top padding since we increased hero padding-top */
+    padding: 0 20px; /* Remove top padding to allow flexbox centering */
     margin: 0 auto;
     width: 100%;
+    height: 100%; /* Take full height of hero */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
   .hero-content {
@@ -1801,6 +1810,10 @@ section {
   .hero {
     padding-top: 60px !important;
     margin-top: -10px !important;
+    height: 100vh !important; /* Ensure full viewport height */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .hero-visual {
@@ -1815,6 +1828,8 @@ section {
     align-items: center !important;
     text-align: center !important;
     gap: 2rem !important;
+    height: 100% !important; /* Take full height of hero */
+    padding: 0 20px !important; /* Remove vertical padding */
   }
 
   .hero-content {
@@ -2123,13 +2138,24 @@ section {
 /* Portrait mobile - ensure content fits */
 @media (max-width: 768px) and (orientation: portrait) {
   .hero {
-    padding-top: 95px !important; /* Increased to ensure content is below header */
+    padding-top: 80px !important; /* Reduced padding to allow more content space */
+    height: 100vh !important; /* Use full viewport height */
     min-height: 100vh !important;
     display: flex !important;
-    align-items: flex-start !important;
+    align-items: center !important; /* Center content vertically */
+    justify-content: center !important;
     padding-bottom: 0 !important; /* Remove bottom padding to eliminate gap */
     background: #ffffff !important; /* Ensure white background */
     margin-bottom: 0 !important; /* Remove any margin */
+  }
+
+  .hero-container {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 12px !important; /* Only horizontal padding */
   }
 
   .about {
