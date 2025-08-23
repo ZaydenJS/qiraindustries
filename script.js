@@ -478,13 +478,12 @@ function openLightbox(currentIndex, galleryImages) {
   // Store current scroll position to restore later
   const scrollY = window.scrollY || document.documentElement.scrollTop;
 
-  // Prevent body scroll when lightbox is open
-  document.body.style.overflow = "hidden";
-  document.body.style.position = "fixed";
+  // Store scroll position on the lightbox element for easy access
+  lightbox.dataset.scrollY = scrollY;
+
+  // Prevent body scroll when lightbox is open - use CSS class approach
+  document.body.classList.add("lightbox-open");
   document.body.style.top = `-${scrollY}px`;
-  document.body.style.width = "100%";
-  document.body.style.left = "0";
-  document.body.style.right = "0";
 
   // Animate in
   setTimeout(() => {
@@ -526,45 +525,48 @@ function openLightbox(currentIndex, galleryImages) {
 
   // Close functionality
   function closeLightbox() {
-    // Get the stored scroll position
-    const scrollY = document.body.style.top;
-    const scrollPosition = scrollY
-      ? parseInt(scrollY.replace("px", "")) * -1
-      : 0;
+    // Get the stored scroll position from the lightbox element
+    const scrollPosition = parseInt(lightbox.dataset.scrollY) || 0;
 
-    // Restore body scroll immediately
-    document.body.style.overflow = "";
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.width = "";
-
-    // Force a reflow to ensure styles are applied
-    document.body.offsetHeight;
-
-    // Restore scroll position after a brief delay to ensure DOM is ready
-    setTimeout(() => {
-      window.scrollTo(0, scrollPosition);
-      // Force another reflow to ensure scrolling works properly
-      document.documentElement.scrollTop = scrollPosition;
-    }, 10);
-
+    // Start fade out animation
     lightbox.style.opacity = "0";
+
+    // Restore body scroll using CSS class approach
+    document.body.classList.remove("lightbox-open");
+    document.body.style.top = "";
+
+    // Restore scroll position immediately for better mobile experience
+    window.scrollTo(0, scrollPosition);
+
+    // Remove lightbox after animation completes
     setTimeout(() => {
       if (lightbox.parentNode) {
         lightbox.remove();
       }
-      // Additional cleanup - ensure scrolling is fully restored
-      document.body.style.cssText = "";
-      window.scrollTo(0, scrollPosition);
+      // Final cleanup - ensure scroll position is maintained
+      if (Math.abs(window.scrollY - scrollPosition) > 5) {
+        window.scrollTo(0, scrollPosition);
+      }
     }, 300);
   }
 
   closeButton.addEventListener("click", closeLightbox);
+
+  // Handle background clicks to close lightbox
   lightbox.addEventListener("click", function (e) {
     if (e.target === lightbox) {
       closeLightbox();
     }
   });
+
+  // Prevent scrolling on the lightbox itself (mobile fix)
+  lightbox.addEventListener(
+    "touchmove",
+    function (e) {
+      e.preventDefault();
+    },
+    { passive: false }
+  );
 
   // Keyboard navigation
   function handleKeydown(e) {

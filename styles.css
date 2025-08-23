@@ -1899,6 +1899,20 @@ section {
     overflow: visible;
   }
 
+  /* Lightbox mobile optimizations */
+  .lightbox {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Prevent body scroll when lightbox is open */
+  body.lightbox-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
   /* Better contact section */
   .contact-item {
     padding: 1.5rem 0;
