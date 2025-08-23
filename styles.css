@@ -46,7 +46,6 @@ h4,
 h5,
 h6 {
   font-family: var(--font-inter) !important;
-  font-weight: normal !important;
 }
 
 /* Preloader Styles */
@@ -165,8 +164,8 @@ h6 {
 }
 
 .nav-logo h2 {
-  color: #2c5aa0;
-  font-weight: normal;
+  color: #333 !important;
+  font-weight: 600 !important;
   font-size: 1.5rem;
   margin-bottom: 0.2rem;
   font-family: var(--font-inter);
@@ -181,8 +180,8 @@ h6 {
 
 .nav-link {
   text-decoration: none;
-  color: #333;
-  font-weight: normal;
+  color: #333 !important;
+  font-weight: 500 !important;
   transition: color 0.3s ease;
   position: relative;
 }
@@ -441,7 +440,7 @@ h6 {
 
 .hero-title {
   font-size: 3.5rem;
-  font-weight: normal;
+  font-weight: 700;
   line-height: 1.1;
   margin-bottom: 1.5rem;
   color: #1a202c;
@@ -484,7 +483,7 @@ h6 {
 
 .stat-number {
   font-size: 2rem;
-  font-weight: normal;
+  font-weight: 700;
   color: #2c5aa0;
   font-family: var(--font-inter);
 }
@@ -553,8 +552,8 @@ h6 {
 
 .card-header h3 {
   font-size: 1.5rem;
-  font-weight: normal;
-  color: #2c5aa0;
+  font-weight: 600;
+  color: #333;
   font-family: var(--font-inter);
 }
 
@@ -607,7 +606,7 @@ h6 {
 
 .commitment-text h4 {
   font-size: 1.1rem;
-  font-weight: normal;
+  font-weight: 600;
   color: #1a202c;
   margin-bottom: 0.25rem;
 }
@@ -745,8 +744,8 @@ section {
 
 .section-header h2 {
   font-size: 2.5rem;
-  font-weight: normal;
-  color: #2c5aa0;
+  font-weight: 600;
+  color: #333;
   margin-bottom: 1rem;
   font-family: var(--font-inter);
   position: relative;
@@ -912,7 +911,7 @@ section {
   color: #333;
   font-size: 1.2rem;
   margin-bottom: 1rem;
-  font-weight: normal;
+  font-weight: 600;
   height: 3rem;
   display: flex;
   align-items: center;
@@ -1207,7 +1206,7 @@ section {
     font-size: 1.1rem;
     padding: 0.5rem;
     display: block;
-    font-weight: normal;
+    font-weight: 500;
   }
 
   .nav-contact {
@@ -1723,7 +1722,7 @@ section {
     margin: 0.1rem 1rem !important;
     border-radius: 8px !important;
     transition: all 0.3s ease !important;
-    font-weight: normal !important;
+    font-weight: 500 !important;
   }
 
   .nav-link:hover {
@@ -2077,6 +2076,27 @@ section {
   .nav-link {
     color: #333 !important;
   }
+
+  .nav-logo h2 {
+    color: #333 !important;
+    font-weight: 600 !important;
+  }
+}
+
+/* Force logo and navigation styling - highest specificity */
+.header .nav-container .nav-logo h2,
+.navbar .nav-container .nav-logo h2,
+header .nav-container .nav-logo h2 {
+  color: #333 !important;
+  font-weight: 600 !important;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1) !important;
+}
+
+.header .nav-menu .nav-link,
+.navbar .nav-menu .nav-link,
+header .nav-menu .nav-link {
+  color: #333 !important;
+  font-weight: 500 !important;
 }
 
 /* Print styles */
