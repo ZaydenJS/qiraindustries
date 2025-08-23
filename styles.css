@@ -1894,6 +1894,16 @@ section {
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* Ensure gallery section doesn't interfere with scrolling */
+  .gallery {
+    -webkit-overflow-scrolling: touch;
+    overflow: visible;
+  }
+
+  .gallery-grid {
+    overflow: visible;
+  }
+
   /* Better contact section */
   .contact-item {
     padding: 1.5rem 0;

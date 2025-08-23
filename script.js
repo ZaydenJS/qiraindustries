@@ -487,13 +487,15 @@ function openLightbox(currentIndex, galleryImages) {
   document.body.appendChild(lightbox);
 
   // Store current scroll position to restore later
-  const scrollY = window.scrollY;
+  const scrollY = window.scrollY || document.documentElement.scrollTop;
 
   // Prevent body scroll when lightbox is open
   document.body.style.overflow = "hidden";
   document.body.style.position = "fixed";
   document.body.style.top = `-${scrollY}px`;
   document.body.style.width = "100%";
+  document.body.style.left = "0";
+  document.body.style.right = "0";
 
   // Animate in
   setTimeout(() => {
@@ -537,23 +539,34 @@ function openLightbox(currentIndex, galleryImages) {
   function closeLightbox() {
     // Get the stored scroll position
     const scrollY = document.body.style.top;
+    const scrollPosition = scrollY
+      ? parseInt(scrollY.replace("px", "")) * -1
+      : 0;
 
-    // Restore body scroll
+    // Restore body scroll immediately
     document.body.style.overflow = "";
     document.body.style.position = "";
     document.body.style.top = "";
     document.body.style.width = "";
 
-    // Restore scroll position
-    if (scrollY) {
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
-    }
+    // Force a reflow to ensure styles are applied
+    document.body.offsetHeight;
+
+    // Restore scroll position after a brief delay to ensure DOM is ready
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+      // Force another reflow to ensure scrolling works properly
+      document.documentElement.scrollTop = scrollPosition;
+    }, 10);
 
     lightbox.style.opacity = "0";
     setTimeout(() => {
       if (lightbox.parentNode) {
         lightbox.remove();
       }
+      // Additional cleanup - ensure scrolling is fully restored
+      document.body.style.cssText = "";
+      window.scrollTo(0, scrollPosition);
     }, 300);
   }
 
