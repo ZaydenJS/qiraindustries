@@ -1566,7 +1566,7 @@ section {
     height: 100%; /* Take full height of hero */
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: space-evenly !important; /* Distribute space evenly */
     align-items: center !important;
   }
 
@@ -1824,10 +1824,10 @@ section {
   .hero-container {
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: space-evenly !important; /* Distribute space evenly */
     align-items: center !important;
     text-align: center !important;
-    gap: 2rem !important;
+    gap: 1.5rem !important; /* Slightly reduced gap */
     height: 100% !important; /* Take full height of hero */
     padding: 0 20px !important; /* Remove vertical padding */
   }
@@ -2153,7 +2153,7 @@ section {
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important;
+    justify-content: space-evenly !important; /* Distribute space evenly */
     align-items: center !important;
     padding: 0 12px !important; /* Only horizontal padding */
   }
@@ -2175,12 +2175,20 @@ section {
     line-height: 1.2 !important;
     margin-bottom: 0.8rem !important; /* Reduced margin */
     padding: 0 8px !important; /* Add padding */
+    font-family: var(--font-inter) !important; /* Ensure consistent font */
+    font-weight: 700 !important; /* Ensure bold weight */
+    color: #1a202c !important; /* Ensure consistent color */
+    text-align: center !important; /* Ensure centered */
   }
 
   .hero-subtitle {
     font-size: 0.9rem !important; /* Smaller subtitle */
     margin-bottom: 1rem !important; /* Reduced margin */
     padding: 0 12px !important; /* Add padding */
+    font-family: var(--font-inter) !important; /* Ensure consistent font */
+    color: #666 !important; /* Ensure consistent color */
+    text-align: center !important; /* Ensure centered */
+    line-height: 1.4 !important; /* Ensure good readability */
   }
 
   .hero-stats {
@@ -2420,5 +2428,62 @@ header .nav-menu .nav-link {
 @media (min-width: 769px) {
   .back-to-top {
     display: none !important;
+  }
+}
+
+/* Force mobile hero styling to match simulator exactly - highest priority */
+@media (max-width: 768px) {
+  .hero-title,
+  .hero .hero-title,
+  .hero-container .hero-title {
+    font-family: var(--font-inter) !important;
+    font-weight: 700 !important;
+    color: #1a202c !important;
+    text-align: center !important;
+    font-size: 1.7rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.8rem !important;
+    padding: 0 8px !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+  }
+
+  .hero-subtitle,
+  .hero .hero-subtitle,
+  .hero-container .hero-subtitle {
+    font-family: var(--font-inter) !important;
+    color: #666 !important;
+    text-align: center !important;
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1rem !important;
+    padding: 0 12px !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+  }
+
+  /* Ensure hero container uses space-evenly distribution */
+  .hero-container,
+  .hero .hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-evenly !important;
+    align-items: center !important;
+    height: 100% !important;
+    padding: 0 12px !important;
+  }
+
+  /* Force white background and proper spacing */
+  .hero,
+  .hero-section {
+    background: #ffffff !important;
+    padding-top: 80px !important;
+    height: 100vh !important;
+    min-height: 100vh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
