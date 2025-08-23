@@ -971,12 +971,15 @@ section {
   transition: opacity 0.3s ease;
 }
 
-.gallery-item:hover .gallery-overlay {
-  opacity: 1;
-}
+/* Only apply hover effects on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-item:hover .gallery-overlay {
+    opacity: 1;
+  }
 
-.gallery-item:hover img {
-  transform: scale(1.1);
+  .gallery-item:hover img {
+    transform: scale(1.1);
+  }
 }
 
 .gallery-overlay i {
@@ -1873,6 +1876,22 @@ section {
     max-width: 100%;
     width: 100%;
     box-sizing: border-box;
+    /* Prevent scroll issues on mobile */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: auto;
+  }
+
+  /* Prevent touch callouts and selections that can interfere with scrolling */
+  .gallery-item,
+  .gallery-item img,
+  .gallery-overlay {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* Better contact section */

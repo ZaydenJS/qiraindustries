@@ -322,7 +322,33 @@ function initGallery() {
   });
 
   galleryItems.forEach((item, index) => {
-    item.addEventListener("click", function () {
+    // Use touchend for better mobile performance and prevent scroll conflicts
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    item.addEventListener(
+      "touchstart",
+      function (e) {
+        touchStartY = e.changedTouches[0].screenY;
+      },
+      { passive: true }
+    );
+
+    item.addEventListener("touchend", function (e) {
+      touchEndY = e.changedTouches[0].screenY;
+      // Only open lightbox if it's a tap (not a scroll)
+      if (Math.abs(touchEndY - touchStartY) < 10) {
+        e.preventDefault();
+        openLightbox(index, galleryImages);
+      }
+    });
+
+    // Keep click for desktop
+    item.addEventListener("click", function (e) {
+      // Prevent double firing on mobile
+      if (e.type === "click" && "ontouchstart" in window) {
+        return;
+      }
       openLightbox(index, galleryImages);
     });
   });
@@ -460,6 +486,15 @@ function openLightbox(currentIndex, galleryImages) {
   // Add to DOM
   document.body.appendChild(lightbox);
 
+  // Store current scroll position to restore later
+  const scrollY = window.scrollY;
+
+  // Prevent body scroll when lightbox is open
+  document.body.style.overflow = "hidden";
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollY}px`;
+  document.body.style.width = "100%";
+
   // Animate in
   setTimeout(() => {
     lightbox.style.opacity = "1";
@@ -500,6 +535,20 @@ function openLightbox(currentIndex, galleryImages) {
 
   // Close functionality
   function closeLightbox() {
+    // Get the stored scroll position
+    const scrollY = document.body.style.top;
+
+    // Restore body scroll
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+
+    // Restore scroll position
+    if (scrollY) {
+      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+    }
+
     lightbox.style.opacity = "0";
     setTimeout(() => {
       if (lightbox.parentNode) {
