@@ -164,12 +164,23 @@ h6 {
 }
 
 .nav-logo h2 {
-  color: #333 !important;
+  color: #333 !important; /* Changed back to black */
   font-weight: 600 !important;
   font-size: 1.5rem;
   margin-bottom: 0.2rem;
   font-family: var(--font-inter);
   letter-spacing: 0.05em;
+  transition: color 0.3s ease; /* Added smooth transition */
+}
+
+.nav-logo:hover h2 {
+  color: #2c5aa0 !important; /* Blue on hover */
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
 }
 
 .nav-menu {
@@ -234,10 +245,16 @@ h6 {
   min-width: 44px;
   justify-content: center;
   align-items: center;
+  z-index: 1002; /* Ensure hamburger is above the menu */
+  position: relative;
 }
 
 .hamburger:hover {
   background-color: rgba(44, 90, 160, 0.1);
+}
+
+.hamburger:active {
+  background-color: rgba(44, 90, 160, 0.2);
 }
 
 .bar {
@@ -245,8 +262,9 @@ h6 {
   height: 3px;
   background: #333;
   margin: 3px 0;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   border-radius: 2px;
+  display: block;
 }
 
 /* Hero Section */
@@ -318,10 +336,11 @@ h6 {
 @media (max-width: 768px) {
   .hero {
     text-align: center !important;
-    padding-top: 75px !important;
+    padding-top: 90px !important; /* Increased to push content below header */
     min-height: 100vh !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 0 !important; /* Remove bottom padding to eliminate gap */
     background: #ffffff !important;
+    margin-bottom: 0 !important; /* Ensure no margin */
   }
 
   /* Force white background on mobile and hide complex patterns */
@@ -346,7 +365,7 @@ h6 {
   .hero-container {
     text-align: center !important;
     justify-items: center !important;
-    padding-top: 0.5rem !important;
+    padding-top: 1rem !important; /* Increased padding to push content down */
     position: relative;
     z-index: 2;
   }
@@ -695,31 +714,31 @@ h6 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  color: #333;
-  border-color: #ffd700;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(135deg, #2c5aa0, #1e3a6f);
+  color: white;
+  border-color: #2c5aa0;
+  box-shadow: 0 4px 15px rgba(44, 90, 160, 0.3);
 }
 
 .btn-primary:hover {
-  background: transparent;
-  color: #ffd700;
-  border-color: #ffd700;
+  background: linear-gradient(135deg, #1e3a6f, #2c5aa0);
+  color: white;
+  border-color: #1e3a6f;
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 15px 35px rgba(44, 90, 160, 0.4);
 }
 
 .btn-outline {
-  background: #2c5aa0;
+  background: #1e3a6f; /* Use the darker blue as default (same as hover) */
   color: white;
-  border-color: #2c5aa0;
-  box-shadow: 0 8px 25px rgba(44, 90, 160, 0.2);
+  border-color: #1e3a6f;
+  box-shadow: 0 8px 25px rgba(30, 58, 111, 0.2);
 }
 
 .btn-outline:hover {
-  background: #1e3a6f;
+  background: #2c5aa0; /* Lighter blue on hover */
   color: white;
-  border-color: #1e3a6f;
+  border-color: #2c5aa0;
   transform: translateY(-3px);
   box-shadow: 0 15px 35px rgba(44, 90, 160, 0.4);
 }
@@ -773,6 +792,13 @@ section {
 /* About Section */
 .about {
   background: #f8f9fa;
+}
+
+/* Mobile: Ensure consistent white background */
+@media (max-width: 768px) {
+  .about {
+    background: #ffffff !important; /* Match hero background on mobile */
+  }
 }
 
 .about-content {
@@ -1186,16 +1212,18 @@ section {
     background-color: white;
     width: 100%;
     text-align: center;
-    transition: 0.3s;
+    transition: left 0.3s ease;
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     padding: 1.5rem 0;
-    z-index: 999;
+    z-index: 1001; /* Increased z-index to ensure it appears above other elements */
     max-height: calc(100vh - 70px);
     overflow-y: auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .nav-menu.active {
     left: 0;
+    display: flex; /* Ensure it's displayed when active */
   }
 
   .nav-menu li {
@@ -1217,15 +1245,15 @@ section {
     padding: 0.8rem 0;
   }
   .container {
-    padding: 0 15px;
+    padding: 0 12px; /* Reduced padding for very small screens */
   }
 
   .nav-container {
-    padding: 0 15px;
+    padding: 0 12px; /* Reduced padding for very small screens */
   }
 
   .nav-logo h2 {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Slightly smaller logo on very small screens */
   }
 
   .hero {
@@ -1249,66 +1277,79 @@ section {
   }
 
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Reduced for better mobile fit */
     line-height: 1.2;
     text-align: center !important;
     margin: 0 auto 1rem auto;
     width: 100%;
+    padding: 0 10px; /* Add padding to prevent edge cutoff */
+    word-wrap: break-word;
   }
 
   .hero-subtitle {
-    font-size: 1rem;
-    margin: 0 auto 1.5rem auto;
+    font-size: 0.95rem; /* Slightly smaller for mobile */
+    margin: 0 auto 1.2rem auto; /* Reduced margin */
     text-align: center !important;
     width: 100%;
+    padding: 0 15px; /* Add padding to prevent edge cutoff */
+    line-height: 1.4;
   }
 
   .hero-stats {
     justify-content: center !important;
     text-align: center !important;
-    margin: 0 auto;
+    margin: 0 auto 1.2rem auto; /* Reduced margin */
     width: 100%;
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
+    gap: 1rem; /* Reduced gap */
+    padding: 0 10px; /* Add padding */
   }
 
   .stat-item {
     text-align: center !important;
+    min-width: 80px; /* Ensure minimum width */
+    flex: 1; /* Allow flexible sizing */
   }
 
   .hero-features {
     justify-content: center !important;
     text-align: center !important;
-    margin: 1.5rem auto 2.5rem auto;
+    margin: 1rem auto 2rem auto; /* Reduced margins */
     width: 100%;
+    padding: 0 10px; /* Add padding to prevent edge cutoff */
   }
 
   .btn {
-    padding: 1rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.9rem 1.3rem; /* Slightly reduced padding */
+    font-size: 0.85rem; /* Smaller font for mobile */
     min-height: 44px;
     min-width: 44px;
   }
 
   .hero-cta {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem; /* Reduced gap */
     text-align: center !important;
     justify-content: center !important;
     align-items: center !important;
     margin: 0 auto;
     width: 100%;
+    padding: 0 15px; /* Add padding to prevent edge cutoff */
   }
 
   .hero-cta .btn {
     width: 100%;
-    max-width: 280px;
+    max-width: 260px; /* Reduced max width */
     justify-content: center !important;
     text-align: center !important;
     margin: 0 auto;
   }
 
   .feature-pill {
-    font-size: 0.8rem;
-    padding: 0.5rem 1rem;
+    font-size: 0.75rem; /* Smaller text for mobile */
+    padding: 0.5rem 0.8rem; /* Reduced padding */
+    margin: 0.2rem; /* Add small margin for spacing */
+    white-space: nowrap; /* Prevent text wrapping */
   }
 
   /* Hide Our Commitment section on mobile */
@@ -1484,16 +1525,18 @@ section {
     background-color: white;
     width: 100%;
     text-align: center;
-    transition: 0.3s;
+    transition: left 0.3s ease;
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     padding: 2rem 0;
-    z-index: 999;
+    z-index: 1001; /* Increased z-index to ensure it appears above other elements */
     max-height: calc(100vh - 80px);
     overflow-y: auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .nav-menu.active {
     left: 0;
+    display: flex; /* Ensure it's displayed when active */
   }
 
   .nav-menu li {
@@ -1505,7 +1548,7 @@ section {
   }
 
   .hero {
-    padding-top: 75px;
+    padding-top: 90px; /* Increased to match smaller screen breakpoint */
     padding-bottom: 2rem;
   }
 
@@ -1513,7 +1556,7 @@ section {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center !important;
-    padding: 2rem 20px;
+    padding: 1.5rem 20px; /* Reduced top padding since we increased hero padding-top */
     margin: 0 auto;
     width: 100%;
   }
@@ -1668,48 +1711,59 @@ section {
 
 /* Additional Mobile Improvements */
 @media (max-width: 768px) {
-  /* Fix white space above header on mobile and match status bar */
+  /* Hide desktop navigation and show hamburger */
+  .nav-menu {
+    display: none;
+  }
+
+  .nav-menu.active {
+    display: flex !important;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    flex-direction: column;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 0;
+    z-index: 1001;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .hamburger {
+    display: flex !important;
+  }
+
+  /* Fix white space above header on mobile */
   html,
   body {
-    background: rgba(255, 255, 255, 0.85) !important;
+    background: #ffffff !important; /* Force white background */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  /* Ensure all sections have consistent background on mobile */
+  section {
+    background: #ffffff !important;
     margin: 0 !important;
-    padding: 0 !important;
-    min-height: 100vh !important;
   }
 
-  /* Remove any potential browser default spacing */
-  html {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-    /* Make status bar area match header */
-    background: rgba(255, 255, 255, 0.85) !important;
-  }
-
-  /* Ensure the viewport area above header matches */
-  body::before {
-    content: "";
-    position: fixed;
+  /* Ensure header starts at very top */
+  .header {
     top: 0;
+    margin-top: 0;
+    background: rgba(255, 255, 255, 0.95);
     left: 0;
     right: 0;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.85);
-    z-index: 999;
-    pointer-events: none;
   }
 
-  /* Ensure header starts at very top and matches body background */
-  .header {
-    top: 0 !important;
-    margin-top: 0 !important;
-    background: rgba(255, 255, 255, 0.85) !important;
-    left: 0 !important;
-    right: 0 !important;
-  }
-
-  /* Ensure scrolled header also matches */
+  /* Ensure scrolled header consistency */
   .header.scrolled {
-    background: rgba(255, 255, 255, 0.85) !important;
+    background: rgba(255, 255, 255, 0.98);
   }
 
   /* Clean mobile navigation hover effects */
@@ -1718,11 +1772,24 @@ section {
   }
 
   .nav-link {
-    padding: 0.6rem 1.5rem !important;
-    margin: 0.1rem 1rem !important;
+    padding: 0.8rem 1.5rem !important;
+    margin: 0.2rem 1rem !important;
     border-radius: 8px !important;
     transition: all 0.3s ease !important;
     font-weight: 500 !important;
+    display: block !important;
+    color: #333 !important;
+    text-decoration: none !important;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus {
+    background-color: rgba(44, 90, 160, 0.1) !important;
+    color: #2c5aa0 !important;
+  }
+
+  .nav-link:active {
+    background-color: rgba(44, 90, 160, 0.2) !important;
   }
 
   .nav-link:hover {
@@ -1857,12 +1924,17 @@ section {
 
   /* Better spacing for mobile */
   .hero-features {
-    gap: 0.5rem;
+    gap: 0.4rem; /* Reduced gap for tighter spacing */
+    flex-wrap: wrap; /* Ensure wrapping on small screens */
+    justify-content: center;
   }
 
   .feature-pill {
-    padding: 0.6rem 1rem;
-    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem; /* Reduced padding */
+    font-size: 0.8rem; /* Smaller font */
+    margin: 0.1rem; /* Small margin for spacing */
+    white-space: nowrap; /* Prevent text wrapping */
+    min-width: auto; /* Allow flexible width */
   }
 
   /* Improve gallery on mobile */
@@ -2008,34 +2080,157 @@ section {
   /* Fix horizontal scrolling */
   body {
     overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw; /* Prevent viewport overflow */
   }
 
   .hero-container,
   .container {
     max-width: 100%;
     overflow-x: hidden;
+    box-sizing: border-box; /* Ensure padding is included in width */
+  }
+
+  /* Ensure all elements respect viewport width */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Prevent text from causing horizontal overflow */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Ensure stats don't overflow */
+  .stat-number {
+    font-size: 1.8rem; /* Reduced from default */
+  }
+
+  .stat-label {
+    font-size: 0.8rem; /* Smaller label text */
   }
 }
 
 /* Portrait mobile - ensure content fits */
 @media (max-width: 768px) and (orientation: portrait) {
   .hero {
-    padding-top: 80px !important;
+    padding-top: 95px !important; /* Increased to ensure content is below header */
     min-height: 100vh !important;
     display: flex !important;
     align-items: flex-start !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 0 !important; /* Remove bottom padding to eliminate gap */
+    background: #ffffff !important; /* Ensure white background */
+    margin-bottom: 0 !important; /* Remove any margin */
+  }
+
+  .about {
+    background: #ffffff !important; /* Match hero background */
+    padding-top: 0 !important; /* Remove top padding to eliminate gap */
+    margin-top: 0 !important; /* Remove any margin */
   }
 
   .hero-container {
-    margin-top: 0.5rem !important;
+    margin-top: 0.5rem !important; /* Slightly increased margin */
     width: 100% !important;
+    padding: 0 12px !important; /* Reduced padding */
   }
 
   .hero-title {
-    font-size: 1.8rem !important;
+    font-size: 1.7rem !important; /* Slightly smaller */
     line-height: 1.2 !important;
+    margin-bottom: 0.8rem !important; /* Reduced margin */
+    padding: 0 8px !important; /* Add padding */
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem !important; /* Smaller subtitle */
+    margin-bottom: 1rem !important; /* Reduced margin */
+    padding: 0 12px !important; /* Add padding */
+  }
+
+  .hero-stats {
+    margin-bottom: 1rem !important; /* Reduced margin */
+    gap: 0.8rem !important; /* Reduced gap */
+  }
+
+  .hero-features {
+    margin: 0.8rem auto 1.5rem auto !important; /* Reduced margins */
+    gap: 0.3rem !important; /* Tighter gap */
+  }
+
+  .hero-cta {
+    margin-top: 1.5rem !important; /* Reduced margin */
+  }
+}
+
+/* Very small mobile devices (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .hero {
+    padding-top: 100px !important; /* Extra padding for very small screens */
+  }
+
+  .hero-container {
+    padding-top: 0.8rem !important; /* Additional container padding */
+  }
+
+  .hero-title {
+    font-size: 1.6rem !important;
+    padding: 0 8px !important;
+    margin-bottom: 0.8rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem !important;
+    padding: 0 12px !important;
     margin-bottom: 1rem !important;
+  }
+
+  .hero-stats {
+    gap: 0.6rem !important;
+    flex-wrap: wrap !important;
+  }
+
+  .stat-item {
+    min-width: 70px !important;
+  }
+
+  .stat-number {
+    font-size: 1.6rem !important;
+  }
+
+  .stat-label {
+    font-size: 0.75rem !important;
+  }
+
+  .feature-pill {
+    font-size: 0.7rem !important;
+    padding: 0.4rem 0.6rem !important;
+  }
+
+  .btn {
+    font-size: 0.8rem !important;
+    padding: 0.8rem 1.1rem !important;
+  }
+
+  .hero-cta .btn {
+    max-width: 240px !important;
+  }
+
+  .container {
+    padding: 0 10px !important;
+  }
+
+  .nav-container {
+    padding: 0 10px !important;
   }
 }
 
@@ -2092,7 +2287,7 @@ section {
   }
 
   .nav-logo h2 {
-    color: #333 !important;
+    color: #333 !important; /* Changed back to black */
     font-weight: 600 !important;
   }
 }
@@ -2101,9 +2296,9 @@ section {
 .header .nav-container .nav-logo h2,
 .navbar .nav-container .nav-logo h2,
 header .nav-container .nav-logo h2 {
-  color: #333 !important;
+  color: #333 !important; /* Changed back to black */
   font-weight: 600 !important;
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1) !important;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1) !important; /* Updated shadow to match black */
 }
 
 .header .nav-menu .nav-link,
