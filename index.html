@@ -16,17 +16,23 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
     <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    <!-- Non-blocking main stylesheet -->
-    <link rel="preload" as="style" href="styles.css" />
+    <!-- Preload critical gallery images -->
     <link
-      rel="stylesheet"
-      href="styles.css"
-      media="print"
-      onload="this.media='all'"
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=640&q=60"
     />
-    <noscript><link rel="stylesheet" href="styles.css" /></noscript>
+    <link
+      rel="preload"
+      as="image"
+      href="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=640&q=60"
+    />
+    <link rel="preload" as="image" href="Photos/1.jpg" />
+    <link rel="preload" as="image" href="Photos/2.jpg" />
+    <!-- Load main stylesheet immediately for instant rendering -->
+    <link rel="stylesheet" href="styles.css" />
 
-    <!-- Inline minimal critical CSS to prevent FOUC for above-the-fold -->
+    <!-- Expanded critical CSS for instant rendering -->
     <style>
       html {
         scroll-behavior: smooth;
@@ -35,12 +41,18 @@
         --font-inter: "Inter", system-ui, -apple-system, Segoe UI, Roboto,
           Helvetica, Arial, sans-serif;
       }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
         font-family: var(--font-inter);
         line-height: 1.6;
         color: #333;
         background: #fff;
+        overflow-x: hidden;
       }
       .container {
         max-width: 1200px;
@@ -65,6 +77,18 @@
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      .nav-logo h2 {
+        font-weight: normal;
+        font-size: 1.5rem;
+        color: #333;
+      }
+      .logo-link {
+        text-decoration: none;
+        color: inherit;
       }
       .nav-menu {
         list-style: none;
@@ -77,6 +101,29 @@
         text-decoration: none;
         color: #333;
         font-weight: normal;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        transition: all 0.3s ease;
+      }
+      .phone-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 4px;
+      }
+      .bar {
+        width: 25px;
+        height: 3px;
+        background: #333;
+        transition: 0.3s;
       }
       .hero {
         min-height: 100vh;
@@ -91,11 +138,24 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
       }
-      @media (min-width: 992px) {
-        .hero-container {
-          grid-template-columns: 1.2fr 0.8fr;
-        }
+      .hero-title {
+        font-size: 3rem;
+        font-weight: normal;
+        margin-bottom: 1rem;
+        line-height: 1.2;
+      }
+      .highlight {
+        color: #007bff;
+      }
+      .hero-subtitle {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 2rem;
+        line-height: 1.6;
       }
       .btn {
         display: inline-flex;
@@ -107,27 +167,40 @@
         font-weight: 600;
         border: 2px solid transparent;
         cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .btn-primary {
+        background: #007bff;
+        color: white;
+      }
+      .btn-outline {
+        background: transparent;
+        color: #007bff;
+        border-color: #007bff;
+      }
+      @media (min-width: 992px) {
+        .hero-container {
+          grid-template-columns: 1.2fr 0.8fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-menu,
+        .nav-contact {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
       }
     </style>
-    <!-- Removed Google Fonts to eliminate render-blocking and 3P latency -->
-    <!-- Non-critical CSS (icons) loaded asynchronously -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <!-- Load Font Awesome immediately for instant icon rendering -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      media="print"
-      onload="this.media='all'"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      />
-    </noscript>
   </head>
   <body>
     <!-- Header -->
@@ -405,7 +478,6 @@
             <img
               src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=640&q=60"
               alt="Precast concrete products"
-              loading="lazy"
               decoding="async"
               width="800"
               height="600"
@@ -418,7 +490,6 @@
             <img
               src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=640&q=60"
               alt="Construction site"
-              loading="lazy"
               decoding="async"
               width="800"
               height="600"
@@ -457,7 +528,6 @@
             <img
               src="Photos/1.jpg"
               alt="Precast installation"
-              loading="lazy"
               decoding="async"
               width="800"
               height="600"
@@ -470,7 +540,6 @@
             <img
               src="Photos/2.jpg"
               alt="Quality control"
-              loading="lazy"
               decoding="async"
               width="800"
               height="600"
@@ -612,8 +681,7 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Defer non-critical JS -->
-
-    <script src="script.js" defer></script>
+    <!-- Load JS immediately for instant interactivity -->
+    <script src="script.js"></script>
   </body>
 </html>

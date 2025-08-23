@@ -25,11 +25,7 @@ body {
   background: #ffffff;
 }
 
-/* Performance: minimize layout work below the fold */
-section:not(:first-of-type) {
-  content-visibility: auto;
-  contain-intrinsic-size: 1000px;
-}
+/* Removed content-visibility for instant loading */
 
 /* Performance: avoid FOIT when web fonts load */
 :root {

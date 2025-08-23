@@ -1,25 +1,14 @@
-// DOM Content Loaded
-function onIdle(cb) {
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(cb, { timeout: 1500 });
-  } else {
-    setTimeout(cb, 200);
-  }
-}
+// DOM Content Loaded - Optimized for instant loading
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Critical UI init (fast, minimal)
+  // Initialize all functionality immediately for instant loading
   initMobileMenu();
   initSmoothScrolling();
   initBackToTop();
-
-  // Defer non-critical work to idle
-  onIdle(() => {
-    initScrollEffects();
-    initContactForm();
-    initGallery();
-    initAnimations();
-  });
+  initScrollEffects();
+  initContactForm();
+  initGallery();
+  initAnimations();
 });
 
 // Mobile Menu Functionality
