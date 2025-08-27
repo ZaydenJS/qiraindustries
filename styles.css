@@ -76,7 +76,7 @@ h6 {
 .logo-animation h1 {
   font-family: var(--font-inter);
   font-size: 4rem;
-  font-weight: normal;
+  font-weight: 600;
   margin-bottom: 2rem;
   letter-spacing: 0.2em;
   animation: logoGlow 2s ease-in-out infinite alternate;
@@ -466,7 +466,7 @@ h6 {
   font-weight: 700;
   line-height: 1.1;
   margin-bottom: 1.5rem;
-  color: #1a202c;
+  color: #333;
   font-family: var(--font-inter);
 }
 
@@ -489,7 +489,7 @@ h6 {
 .hero-subtitle {
   font-size: 1.2rem;
   line-height: 1.6;
-  color: #64748b;
+  color: #666;
   margin-bottom: 2rem;
   max-width: 500px;
 }
@@ -513,7 +513,7 @@ h6 {
 
 .stat-label {
   font-size: 0.9rem;
-  color: #64748b;
+  color: #666;
   font-weight: 500;
 }
 
@@ -535,7 +535,7 @@ h6 {
   border: 1px solid #e2e8f0;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #475569;
+  color: #666;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
@@ -630,13 +630,13 @@ h6 {
 .commitment-text h4 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #1a202c;
+  color: #333;
   margin-bottom: 0.25rem;
 }
 
 .commitment-text p {
   font-size: 0.9rem;
-  color: #64748b;
+  color: #666;
   line-height: 1.4;
 }
 
@@ -2177,7 +2177,7 @@ section {
     padding: 0 8px !important; /* Add padding */
     font-family: var(--font-inter) !important; /* Ensure consistent font */
     font-weight: 700 !important; /* Ensure bold weight */
-    color: #1a202c !important; /* Ensure consistent color */
+    color: #333 !important; /* Ensure consistent color */
     text-align: center !important; /* Ensure centered */
   }
 
@@ -2438,7 +2438,7 @@ header .nav-menu .nav-link {
   .hero-container .hero-title {
     font-family: var(--font-inter) !important;
     font-weight: 700 !important;
-    color: #1a202c !important;
+    color: #333 !important;
     text-align: center !important;
     font-size: 1.7rem !important;
     line-height: 1.2 !important;
